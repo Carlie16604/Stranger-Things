@@ -18,6 +18,7 @@ const register = async(credentials)=> {
 
 };
 
+
 const loginWithToken = async()=> {
   const token = window.localStorage.getItem('token');
   if(token){
@@ -37,23 +38,31 @@ const loginWithToken = async()=> {
 const fetchPosts = async()=> {
   const response = await axios.get(
     `${BASE_URL}/posts`,
-  );
-  return response.data.data.posts;
-};
-
-const createPost = async(post)=> {
-  const token = window.localStorage.getItem('token');
-  const response = await axios.post(
-    `${BASE_URL}/posts`,
-    { post },
-    {
-      headers: {
-        authorization: `Bearer ${ token }`
+    );
+    return response.data.data.posts;
+  };
+  
+  const createPost = async(post)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.post(
+      `${BASE_URL}/posts`,
+      { post },
+      {
+        headers: {
+          authorization: `Bearer ${ token }`
+        }
       }
-    }
-  );
-  return response.data.data.post;
-};
+      );
+      return response.data.data.post;
+    };
+
+    const removePost = async(posts)=> {
+      const token = window.localStorage.getItem('token');
+      const response = await axios.delete(`${BASE_URL}/posts/${posts._id}`,
+      {headers: {authorization: `Bearer ${ token }`}});
+      console.log(response)
+        return response.data.data
+    };
 
 const login = async(credentials)=> {
   const response = await axios.post(
@@ -71,7 +80,8 @@ const api = {
   login,
   loginWithToken,
   fetchPosts,
-  createPost
+  createPost,
+  removePost
 
 };
 

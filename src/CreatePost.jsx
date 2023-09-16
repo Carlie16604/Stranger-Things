@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import Posts from './Posts.jsx'
 
 const CreatePost = ({ createPost })=> {
   const [price, setPrice] = useState(0);
@@ -23,6 +24,7 @@ const CreatePost = ({ createPost })=> {
     }
   };
   return (
+  <>
     <div>
       <form onSubmit={ submit }>
         {
@@ -33,8 +35,9 @@ const CreatePost = ({ createPost })=> {
         <input placeholder='price' onChange={ev => setPrice(ev.target.value)} />
         <button>Create</button>
       </form>
-      <Link to='/'>Cancel</Link>
     </div>
+      <Link to='/'>Cancel</Link>
+  </>
   );
 };
 

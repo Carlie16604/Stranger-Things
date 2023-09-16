@@ -19,7 +19,7 @@ const AuthForm = (props)=> {
       else {
         setError(ex);
       }
-    }
+    }console.log(setError)
   };
 
   return (
