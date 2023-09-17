@@ -64,6 +64,14 @@ const fetchPosts = async()=> {
         return response.data.data
     };
 
+  const editPost = async(posts)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.put(`${BASE_URL}/posts/${posts._id}`,
+    {headers: {authorization: `Bearer ${ token }`}});
+    setPosts(posts.map(post => post._id !== editPost._id ? post : editPost));
+      // need some way to push the data to the api and return that new info 
+  };
+
 const login = async(credentials)=> {
   const response = await axios.post(
     `${BASE_URL}/users/login`,
@@ -81,7 +89,8 @@ const api = {
   loginWithToken,
   fetchPosts,
   createPost,
-  removePost
+  removePost,
+  editPost
 
 };
 

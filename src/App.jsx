@@ -8,6 +8,7 @@ import AboutUs from './AboutUs';
 import Contact from './contact';
 import './App.css'
 import { useNavigate, useParams, Link, Routes, Route } from 'react-router-dom';
+import Update from './update';
 
 function App() {
   const [auth, setAuth] = useState({});
@@ -57,10 +58,24 @@ function App() {
   };
 
   const RemovePost = async(post)=> {
-    post = await api.removePost(post)
-    setPosts(post.filter(post => post._id !== post.id));
+    await api.removePost(post)
+    setPosts(posts.filter(item => item._id !== post._id));
     navigate(`/`);
   };
+
+  const EditPost = async(post)=> {
+    await api.editPost(post)
+    navigate(`/`);
+  };
+
+  const getNumUserPost = () => {
+    const userArr = posts.filter(item => item.author._id === auth._id);
+    return (
+      userArr.length
+    );
+  };
+
+
 {/*
 const posting = (totalPosts) => {
   if(posts._id === auth.username){
@@ -84,13 +99,16 @@ posting*/}
         auth.username ? (
           <div>
             <h1>
-              Welcome { auth.username }
+              Welcome { auth.username } ({ getNumUserPost() })
               <button onClick={ logout }>Logout</button>
             </h1>
-            <Link to='/posts/create'>Create A Post</Link>
-            <Link to='/about_us'>About Us</Link>
-            <Link to='/contact'>Contact Us!</Link>
-            <Link to='/'>Home</Link>
+            <nav>
+              <Link to='/'>Home</Link>
+              <Link to='/posts/create'>Create A Post</Link>
+              <Link to='/about_us'>About Us</Link>
+              <Link to='/contact'>Contact Us!</Link>
+              <Link to='/update'>Update(Tester)</Link>
+            </nav>
             <Routes>
               <Route path='/posts/create' element={<><CreatePost createPost={ createPost } /> <Posts posts={ posts } auth={ auth }/></>} />
             </Routes>
@@ -105,9 +123,10 @@ posting*/}
       }
       <Routes>
         <Route path='/' element={<Posts posts={ posts } auth={ auth }/>}></Route>
-        <Route path='/posts/:id' element={ <Post posts={ posts } auth={ auth } removePost={ RemovePost }/>} />
+        <Route path='/posts/:id' element={ <Post posts={ posts } auth={ auth } removePost={ RemovePost } editPost={ EditPost }/>} />
         <Route path='/about_us' element={ <AboutUs />} />
         <Route path='/contact' element={ <Contact />}/>
+        <Route path='/update' element={<Update />} />
       </Routes>
       <div>
       </div>{/* pass in a function */}

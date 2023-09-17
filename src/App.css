@@ -6,3 +6,18 @@
   }
 }
 
+body {
+  background-color: rgb(242, 242, 255);
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(253, 215, 166);
+  font-family:Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+  border: rgb(120, 60, 40) 2px solid;
+  padding: 0.5rem;
+  justify-content: space-between;
+  border-radius: 5rem;
+}
+

@@ -22,6 +22,9 @@ const AuthForm = (props)=> {
     }console.log(setError)
   };
 
+  {/*if(username === ''){
+    disabled(login)
+  } else {*/}
   return (
     <form onSubmit={ submit }>
       {
