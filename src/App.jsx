@@ -8,7 +8,7 @@ import AboutUs from './AboutUs';
 import Contact from './contact';
 import './App.css'
 import { useNavigate, useParams, Link, Routes, Route } from 'react-router-dom';
-import Update from './update';
+import BigNum from './BigNum';
 
 function App() {
   const [auth, setAuth] = useState({});
@@ -63,8 +63,9 @@ function App() {
     navigate(`/`);
   };
 
-  const EditPost = async(post)=> {
-    await api.editPost(post)
+  const EditPost = async(post, oldPost)=> {
+    let editPost = await api.editPost(post, oldPost)
+    setPosts(posts.map(post => post._id !== editPost._id ? post : editPost));
     navigate(`/`);
   };
 
@@ -74,22 +75,6 @@ function App() {
       userArr.length
     );
   };
-
-
-{/*
-const posting = (totalPosts) => {
-  if(posts._id === auth.username){
-    return username.posts.length
-  }else{
-    return 'NOPE'
-  }
-}
-
-may also need this: posts.map( post => {
-          return (
-            <li key={ post._id } className={ post.author._id === auth._id ? 'mine': ''}>
-
-posting*/}
 
   return (
     <>
@@ -107,11 +92,11 @@ posting*/}
               <Link to='/posts/create'>Create A Post</Link>
               <Link to='/about_us'>About Us</Link>
               <Link to='/contact'>Contact Us!</Link>
-              <Link to='/update'>Update(Tester)</Link>
+              <Link to='/bigNum'>Most Expensive Post</Link>
             </nav>
-            <Routes>
-              <Route path='/posts/create' element={<><CreatePost createPost={ createPost } /> <Posts posts={ posts } auth={ auth }/></>} />
-            </Routes>
+              <Routes>
+                <Route path='/posts/create' element={<><CreatePost createPost={ createPost } /> <Posts posts={ posts } auth={ auth }/></>} />
+              </Routes>
           </div>
         ): (
           <>
@@ -126,10 +111,10 @@ posting*/}
         <Route path='/posts/:id' element={ <Post posts={ posts } auth={ auth } removePost={ RemovePost } editPost={ EditPost }/>} />
         <Route path='/about_us' element={ <AboutUs />} />
         <Route path='/contact' element={ <Contact />}/>
-        <Route path='/update' element={<Update />} />
+        <Route path='/bigNum' element={<BigNum posts={posts}/>} />
       </Routes>
       <div>
-      </div>{/* pass in a function */}
+      </div>
     </div>
     </>
   )

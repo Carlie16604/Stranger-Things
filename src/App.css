@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: column;
     font-family: verdana;
+    background-color: rgb(203, 203, 203);
+    .nav {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
@@ -19,5 +24,51 @@ nav {
   padding: 0.5rem;
   justify-content: space-between;
   border-radius: 5rem;
+
+}
+
+.list {
+  font-family:verdana;
+}
+
+.list:hover {
+  color:rgb(255, 194, 114);
+}
+
+h1 {
+  font-family: monospace;
+  color: black
+}
+
+button {
+  background-color: rgb(115, 63, 158);
+  border: solid 1px white;
+  margin: 0.5rem;
+  border-radius: 5rem;
+  color:rgb(255, 255, 255);
+}
+
+.detailPost {
+  font-family: monospace;
+  padding: 0.5rem; 
+}
+
+input {
+  border-radius: 0.5rem;
+  border:1px solid rgb(182, 86, 255);
+}
+
+.detailContact {
+  font-family: monospace;
+  text-align: center;
+  font-size: 150%;
+  border: solid 4px rgb(115, 63, 158);
+  border-radius: 5rem;
+  padding: 0.5rem;
+  background-color: rgb(235, 212, 254);
+}
+
+button:disabled {
+  background-color: rgb(209, 209, 209);
 }
 

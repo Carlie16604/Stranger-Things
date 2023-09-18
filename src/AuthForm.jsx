@@ -19,12 +19,12 @@ const AuthForm = (props)=> {
       else {
         setError(ex);
       }
-    }console.log(setError)
+    };
   };
 
-  {/*if(username === ''){
-    disabled(login)
-  } else {*/}
+  // if(username === '' || password === ''){
+  //   <button disabled={true}/>
+  // } else {
   return (
     <form onSubmit={ submit }>
       {
@@ -32,7 +32,7 @@ const AuthForm = (props)=> {
       }
       <input value={ username } onChange={ ev => setUsername(ev.target.value )}/>
       <input value={ password } onChange={ ev => setPassword(ev.target.value )}/>
-      <button>{ props.txt }</button>
+      <button disabled={username === '' || password === ''}>{ props.txt }</button>
     </form>
   );
 };

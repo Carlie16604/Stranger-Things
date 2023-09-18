@@ -60,15 +60,15 @@ const fetchPosts = async()=> {
       const token = window.localStorage.getItem('token');
       const response = await axios.delete(`${BASE_URL}/posts/${posts._id}`,
       {headers: {authorization: `Bearer ${ token }`}});
-      console.log(response)
         return response.data.data
     };
 
-  const editPost = async(posts)=> {
+  const editPost = async(post, oldPost)=> {
     const token = window.localStorage.getItem('token');
-    const response = await axios.put(`${BASE_URL}/posts/${posts._id}`,
+    const response = await axios.patch(`${BASE_URL}/posts/${oldPost._id}`,
+    {post},
     {headers: {authorization: `Bearer ${ token }`}});
-    setPosts(posts.map(post => post._id !== editPost._id ? post : editPost));
+    return response.data.data.post
       // need some way to push the data to the api and return that new info 
   };
 

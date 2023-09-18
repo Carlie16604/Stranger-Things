@@ -6,9 +6,9 @@ const Posts = ({ posts, auth })=> {
       {
         posts.map( post => {
           return (
-            <li key={ post._id } className={ post.author._id === auth._id ? 'mine': ''}>
-              <Link to={`/posts/${post._id}`}>{ post.title }</Link> { (post.price) }
-            </li>
+              <li key={ post._id } className={ post.author._id === auth._id ? 'mine': ''}>
+                <Link className='list' to={`/posts/${post._id}`}>{ post.title }</Link> { (post.price*1).toFixed(2) }
+              </li>
           );
         })
       }
@@ -16,7 +16,7 @@ const Posts = ({ posts, auth })=> {
   );
 };
 
-{/* { (post.price*1).toFixed(2) }*/}
+// (post.price*1).toFixed(2) 
 
 export default Posts;
 

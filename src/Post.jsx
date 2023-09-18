@@ -1,5 +1,5 @@
-
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Route, Routes } from 'react-router-dom';
+import EditPost from './EditPost';
 
 const Post = ({ posts, auth, removePost, editPost })=> {
   const { id } = useParams();
@@ -9,12 +9,14 @@ const Post = ({ posts, auth, removePost, editPost })=> {
   }
   return (
   <>
-    <div>
-      <h1>{ post.title }</h1><h4>User: {post.author.username} is smelly</h4>
+  <br/>
+    <div className='detailContact'>
+      <h1>{ post.title }</h1>
+      <p>User: {post.author.username} is smelly</p>
       <p>Description: {post.description}</p>
       <p>Location: {post.location}</p> 
-      { auth._id === post.author._id ? <button onClick={ ()=> removePost(post)}>x</button>: ''}
-      { auth._id === post.author._id ? <button onClick={ ()=> editPost(post)}>Update Post</button>: ''}
+      { auth._id === post.author._id ? <button onClick={ ()=> removePost(post)}>remove</button>: ''}
+      { auth._id === post.author._id ? <EditPost editPost={ editPost } oldPost={post} />: ''}
     </div>
     <div>
 

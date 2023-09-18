@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Posts from './Posts.jsx'
 
-const CreatePost = ({ createPost })=> {
+const EditPost = ({ editPost, oldPost })=> {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -13,7 +13,7 @@ const CreatePost = ({ createPost })=> {
     ev.preventDefault();
     try {
       const post = {price, title, description, location };
-      await createPost(post);
+      await editPost(post, oldPost);
     }
     catch(ex){
       if(ex.response){
@@ -43,4 +43,4 @@ const CreatePost = ({ createPost })=> {
   );
 };
 
-export default CreatePost;
+export default EditPost;
